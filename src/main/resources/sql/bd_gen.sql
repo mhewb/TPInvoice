@@ -2,7 +2,7 @@ DROP DATABASE IF EXISTS TPInvoice;
 CREATE DATABASE TPInvoice;
 USE TPInvoice;
 
-create table if not exists address
+create table if not exists TPInvoice.address
 (
     id            bigint auto_increment
         primary key,
@@ -12,7 +12,16 @@ create table if not exists address
     zip_code      varchar(255) null
 );
 
-create table if not exists users
+create table if not exists TPInvoice.role
+(
+    id   bigint auto_increment
+        primary key,
+    name varchar(255) null,
+    constraint UK_8sewwnpamngi6b1dwaa88askk
+        unique (name)
+);
+
+create table if not exists TPInvoice.users
 (
     id         bigint auto_increment
         primary key,
@@ -24,7 +33,7 @@ create table if not exists users
         unique (email)
 );
 
-create table if not exists clients
+create table if not exists TPInvoice.clients
 (
     id           bigint auto_increment
         primary key,
@@ -35,12 +44,12 @@ create table if not exists clients
     constraint UK_fs667xslr12dy0tbqohssdw99
         unique (company_name),
     constraint FK5mji06wnp82ijq4297i6vfnfq
-        foreign key (address_id) references address (id),
+        foreign key (address_id) references TPInvoice.address (id),
     constraint FKtiuqdledq2lybrds2k3rfqrv4
-        foreign key (user_id) references users (id)
+        foreign key (user_id) references TPInvoice.users (id)
 );
 
-create table if not exists invoices
+create table if not exists TPInvoice.invoices
 (
     id             bigint auto_increment
         primary key,
@@ -51,10 +60,10 @@ create table if not exists invoices
     status         bit          not null,
     client_id      bigint       null,
     constraint FK9ioqm804urbgy986pdtwqtl0x
-        foreign key (client_id) references clients (id)
+        foreign key (client_id) references TPInvoice.clients (id)
 );
 
-create table if not exists products
+create table if not exists TPInvoice.products
 (
     id          bigint auto_increment
         primary key,
@@ -62,10 +71,10 @@ create table if not exists products
     priceht     double       not null,
     user_id     bigint       null,
     constraint FKdb050tk37qryv15hd932626th
-        foreign key (user_id) references users (id)
+        foreign key (user_id) references TPInvoice.users (id)
 );
 
-create table if not exists invoice_line
+create table if not exists TPInvoice.invoice_line
 (
     id         bigint auto_increment
         primary key,
@@ -73,12 +82,28 @@ create table if not exists invoice_line
     invoice_id bigint null,
     product_id bigint null,
     constraint FK2b91edluue12qy0l4ttn2comt
-        foreign key (invoice_id) references invoices (id),
+        foreign key (invoice_id) references TPInvoice.invoices (id),
     constraint FKkcyquhshtjlug2hvypkmrwnyh
-        foreign key (product_id) references products (id)
+        foreign key (product_id) references TPInvoice.products (id)
 );
 
+create table if not exists TPInvoice.users_role_list
+(
+    user_id      bigint not null,
+    role_list_id bigint not null,
+    constraint FK2oga5218nq5f1133098iwq6r5
+        foreign key (user_id) references TPInvoice.users (id),
+    constraint FK6i3vy3o43ojqp827igbjxenyb
+        foreign key (role_list_id) references TPInvoice.role (id)
+);
+
+
+
 ##### INSERTS
+
+INSERT INTO role(name) VALUES
+                                     ('USER'), ('ADMIN');
+
 
 INSERT INTO users(id, email, first_name, last_name, password) VALUES
   (1, 'admin@my-invoice.fr', 'prénom', 'nom', 'qwerty')
