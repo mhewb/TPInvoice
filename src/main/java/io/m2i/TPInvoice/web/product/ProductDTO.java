@@ -1,30 +1,17 @@
-package io.m2i.TPInvoice.entity;
+package io.m2i.TPInvoice.web.product;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity
-@Table(name = "Products")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Product {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class ProductDTO {
     private Long id;
     private String name;
     private double priceExcludingTax;
     private String description;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
-
-    //TODO : add picture
-
 }

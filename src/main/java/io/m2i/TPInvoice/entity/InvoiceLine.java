@@ -1,9 +1,17 @@
 package io.m2i.TPInvoice.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "InvoiceLine")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class InvoiceLine {
 
     @Id

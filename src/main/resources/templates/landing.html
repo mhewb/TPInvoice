@@ -15,9 +15,14 @@
 
 <body>
 
+<div th:replace="fragments/nav :: nav">...</div>
+
 <div class="container-fluid p-3">
 
+<h1>Landing</h1>
 
+  <a th:href="@{/login}">Log</a>
+  <a th:href="@{/clients}">Clients</a>
 
 </div>
 
