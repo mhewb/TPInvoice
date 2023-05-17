@@ -20,17 +20,17 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class User implements UserDetails {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    protected Long id;
     @Column(unique = true)
-    private String email;
-    private String password;
+    protected String email;
+    protected String password;
     @ManyToMany(fetch = FetchType.EAGER)
-    private List<Role> roleList;
-    private String firstName;
-    private String lastName;
+    protected List<Role> roleList;
+    protected String firstName;
+    protected String lastName;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "user_id")
@@ -40,39 +40,4 @@ public class User implements UserDetails {
     @JoinColumn(name = "user_id")
     List<Product> productList = new ArrayList<>();
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return this.roleList
-                .stream()
-                .map(role -> new SimpleGrantedAuthority(role.getName()))
-                .toList();
-    }
-
-    public String getPassword() {
-        return password;
-    }
-    @Override
-    public String getUsername() {
-        return email;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
 }

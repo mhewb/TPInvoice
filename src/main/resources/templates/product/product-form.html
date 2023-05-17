@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TPInvoice</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+</head>
+
+
+<body>
+
+<div th:replace="fragments/nav :: nav">...</div>
+
+<h1>Add Product</h1>
+
+<div class="container-fluid p-3">
+
+  <div class="container-xs m-5">
+
+    <form action="#" th:action="@{/products/add}" th:object="${product}" method="post">
+
+      <input id="id" type="text" th:field="*{id}"
+             class="form-control" hidden="hidden"/>
+
+      <div class="row row-cols-1 row-cols-xs-2 rounded bg-dark p-3">
+
+        <div class="col bg-light rounded m-1 p-1">
+
+          <label for="firstname"
+                 class="form-label">Price HT:</label>
+          <input id="firstname" type="text" th:field="*{priceHT}"
+                 class="form-control" />
+
+        </div>
+
+        <div class="col bg-light rounded m-1 p-1">
+
+          <label for="lastname"
+                 class="form-label">Description:</label>
+          <input id="lastname" type="text" th:field="*{description}"
+                 class="form-control" />
+
+        </div>
+
+<!--TODO: Address-->
+
+        <button th:if="${product.id == null}"
+                type="submit" class="btn btn-primary">Add</button>
+        <button th:if="${product.id != null}"
+                class="btn btn-primary" method="post"
+                th:formaction="@{/products/edit}" th:object="${product}" type="submit">Edit</button>
+
+      </div>
+    </form>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+</body>
+</html>

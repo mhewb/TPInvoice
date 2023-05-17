@@ -42,7 +42,8 @@ public class WebSecurityConfig {
 
         http.formLogin()
                 .usernameParameter("mail")
-                .passwordParameter("password");
+                .passwordParameter("password")
+                .defaultSuccessUrl("/", true);
 
 //        http.sessionManagement()
 //                .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)

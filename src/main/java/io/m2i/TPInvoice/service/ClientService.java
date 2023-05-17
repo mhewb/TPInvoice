@@ -6,8 +6,6 @@ import io.m2i.TPInvoice.repository.ClientRepository;
 import io.m2i.TPInvoice.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -15,10 +13,27 @@ import java.util.List;
 @AllArgsConstructor
 public class ClientService {
 
-    ClientRepository clientRepository;
+    private ClientRepository clientRepository;
 
+    public Client getClientById(Long id) {
+        return clientRepository.getReferenceById(id);
+    }
     public List<Client> getClientListPerUser(User user) {
         return clientRepository.findClientsByUser(user);
     }
+    public void editClient(Client client, User user) {
+        client.setUser(user);
+        clientRepository.save(client);
+    }
+
+    public void deleteClient(Client client, User user) {
+
+        boolean condition = clientRepository.existsClientByIdAndUser(client.getId(), user);
+        if (! condition) {
+            throw new RuntimeException("Client not belonging to User"); // TODO: Personalise Exceptions
+        }
+        clientRepository.delete(client);
+    }
+
 
 }

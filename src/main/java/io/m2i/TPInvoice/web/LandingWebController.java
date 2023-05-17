@@ -12,7 +12,7 @@ public class LandingWebController {
 
     @GetMapping
     public String landing(Model model) {
-        return "/web/landing";
+        return "landing";
     }
 
 }

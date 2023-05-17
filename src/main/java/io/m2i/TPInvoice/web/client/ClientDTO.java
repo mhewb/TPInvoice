@@ -1,7 +1,6 @@
 package io.m2i.TPInvoice.web.client;
 
 import io.m2i.TPInvoice.entity.Address;
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,5 +15,4 @@ public class ClientDTO {
     private String companyName;
     private String phoneNumber;
     private Address address;
-
 }

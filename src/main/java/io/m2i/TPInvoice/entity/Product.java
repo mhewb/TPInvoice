@@ -21,7 +21,7 @@ public class Product {
     private String description;
 
     @ManyToOne
-    @JoinColumn(name = "user")
+    @JoinColumn(name = "user_id")
     private User user;
 
     //TODO : add picture
