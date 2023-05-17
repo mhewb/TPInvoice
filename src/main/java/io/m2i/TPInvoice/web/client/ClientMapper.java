@@ -10,4 +10,5 @@ public interface ClientMapper {
     ClientDTO toDTO(Client Client);
 
     Client fromDTO(ClientDTO ClientDTO);
+
 }

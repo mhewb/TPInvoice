@@ -2,7 +2,7 @@ DROP DATABASE IF EXISTS TPInvoice;
 CREATE DATABASE TPInvoice;
 USE TPInvoice;
 
-create table address
+create table TPInvoice.address
 (
     id            bigint auto_increment
         primary key,
@@ -12,7 +12,7 @@ create table address
     zip_code      varchar(255) null
 );
 
-create table role
+create table TPInvoice.role
 (
     id   bigint auto_increment
         primary key,
@@ -21,7 +21,7 @@ create table role
         unique (name)
 );
 
-create table users
+create table TPInvoice.users
 (
     id         bigint auto_increment
         primary key,
@@ -33,7 +33,7 @@ create table users
         unique (email)
 );
 
-create table clients
+create table TPInvoice.clients
 (
     id           bigint auto_increment
         primary key,
@@ -44,12 +44,12 @@ create table clients
     constraint UK_fs667xslr12dy0tbqohssdw99
         unique (company_name),
     constraint FK5mji06wnp82ijq4297i6vfnfq
-        foreign key (address_id) references address (id),
+        foreign key (address_id) references TPInvoice.address (id),
     constraint FKtiuqdledq2lybrds2k3rfqrv4
-        foreign key (user_id) references users (id)
+        foreign key (user_id) references TPInvoice.users (id)
 );
 
-create table invoices
+create table TPInvoice.invoices
 (
     id             bigint auto_increment
         primary key,
@@ -61,26 +61,23 @@ create table invoices
     client_id      bigint       null,
     user_id        bigint       null,
     constraint FK9ioqm804urbgy986pdtwqtl0x
-        foreign key (client_id) references clients (id),
+        foreign key (client_id) references TPInvoice.clients (id),
     constraint FKbwr4d4vyqf2bkoetxtt8j9dx7
-        foreign key (user_id) references users (id)
+        foreign key (user_id) references TPInvoice.users (id)
 );
 
-create table products
+create table TPInvoice.products
 (
     id          bigint auto_increment
         primary key,
     description varchar(255) null,
     priceht     double       not null,
-    user        bigint       null,
     user_id     bigint       null,
     constraint FKdb050tk37qryv15hd932626th
-        foreign key (user_id) references users (id),
-    constraint FKt2biqpcikn4bppo3qpqlwoh1w
-        foreign key (user) references users (id)
+        foreign key (user_id) references TPInvoice.users (id)
 );
 
-create table invoice_line
+create table TPInvoice.invoice_line
 (
     id         bigint auto_increment
         primary key,
@@ -88,23 +85,20 @@ create table invoice_line
     invoice_id bigint null,
     product_id bigint null,
     constraint FK2b91edluue12qy0l4ttn2comt
-        foreign key (invoice_id) references invoices (id),
+        foreign key (invoice_id) references TPInvoice.invoices (id),
     constraint FKkcyquhshtjlug2hvypkmrwnyh
-        foreign key (product_id) references products (id)
+        foreign key (product_id) references TPInvoice.products (id)
 );
 
-create table users_role_list
+create table TPInvoice.users_role_list
 (
     user_id      bigint not null,
     role_list_id bigint not null,
     constraint FK2oga5218nq5f1133098iwq6r5
-        foreign key (user_id) references users (id),
+        foreign key (user_id) references TPInvoice.users (id),
     constraint FK6i3vy3o43ojqp827igbjxenyb
-        foreign key (role_list_id) references role (id)
+        foreign key (role_list_id) references TPInvoice.role (id)
 );
-
-
-
 
 
 ##### INSERTS

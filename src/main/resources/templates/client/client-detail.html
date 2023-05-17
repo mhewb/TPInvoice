@@ -15,19 +15,11 @@
 
 <body>
 
+<div th:replace="fragments/nav :: nav">...</div>
+
 <div class="container-fluid p-3">
 
-<h1>Landing</h1>
 
-  <a th:href="@{/login}">Log</a>
-  <a th:href="@{/clients}">Clients</a>
-
-  <div sec:authorize="isAuthenticated()">
-    <!--    Logged user: <span sec:authentication="user.getName"><span/>-->
-    Roles: <span sec:authentication="principal.authorities"/>
-    Authenticated user's email:
-    <div sec:authentication="principal.email"></div>
-  </div>
 
 </div>
 

@@ -15,31 +15,14 @@
 
 <body>
 
+<div th:replace="fragments/nav :: nav">...</div>
+
 <div class="container-fluid p-3">
 
-  <h1>Client List</h1>
+<h1>Landing</h1>
 
-  <table class="table table-striped table-hover p-3">
-
-    <thead>
-    <tr>
-      <th>Id</th>
-      <th>Company</th>
-      <th>Phone Number</th>
-      <th>Address</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    <tr th:each="client : ${clientList}">
-      <td th:text="'&num;'+${client.id}"></td>
-      <td th:text="${client.companyName}"></td>
-      <td th:text="${client.phoneNumber}"></td>
-      <td th:text="${client.address.streetNumber}+' '+${client.address.streetName}+', '+${client.address.zipCode}+' '+${client.address.city}"></td>
-    </tr>
-    </tbody>
-
-  </table>
+  <a th:href="@{/login}">Log</a>
+  <a th:href="@{/clients}">Clients</a>
 
 </div>
 

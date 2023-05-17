@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -34,7 +35,7 @@ public class Invoice {
     private User user;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "invoice")
-    private List<InvoiceLine> invoiceLineList;
+    private List<InvoiceLine> invoiceLineList = new ArrayList<>();
 
     public void setDueDate() {
         this.dueDate = this.issueDate.plusMonths(1);

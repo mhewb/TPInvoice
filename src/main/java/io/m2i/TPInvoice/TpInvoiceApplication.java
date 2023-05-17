@@ -1,9 +1,6 @@
 package io.m2i.TPInvoice;
 
-import io.m2i.TPInvoice.entity.Address;
-import io.m2i.TPInvoice.entity.Client;
-import io.m2i.TPInvoice.entity.Role;
-import io.m2i.TPInvoice.entity.User;
+import io.m2i.TPInvoice.entity.*;
 import io.m2i.TPInvoice.repository.UserRepository;
 import io.m2i.TPInvoice.repository.RoleRepository;
 import lombok.AllArgsConstructor;
@@ -12,6 +9,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 
 @SpringBootApplication
@@ -72,8 +70,40 @@ public class TpInvoiceApplication implements CommandLineRunner {
 		user1.getClientList().add(client1);
 		user2.getClientList().add(client2);
 
-//		userRepository.save(user1);
-//		userRepository.save(user2);
+		Product product1 = new Product();
+		product1.setUser(user1);
+		user1.getProductList().add(product1);
+		product1.setPriceExcludingTax(15.65);
+		product1.setDescription("description1");
+		product1.setName("Produit1");
+
+		Product product2 = new Product();
+		product2.setUser(user1);
+		user1.getProductList().add(product2);
+		product2.setPriceExcludingTax(350);
+		product2.setDescription("description2");
+		product2.setName("Produit2");
+
+		InvoiceLine invoiceLine1 = new InvoiceLine();
+		invoiceLine1.setProduct(product1);
+		invoiceLine1.setQuantity(3);
+
+		InvoiceLine invoiceLine2 = new InvoiceLine();
+		invoiceLine2.setProduct(product2);
+		invoiceLine2.setQuantity(1);
+
+		Invoice invoice = new Invoice();
+		invoice.setIssueDate(LocalDate.of(2023,2,17));
+		invoice.setClient(client1);
+		user1.getInvoiceList().add(invoice);
+		invoice.setUser(user1);
+		invoice.getInvoiceLineList().add(invoiceLine1);
+		invoiceLine1.setInvoice(invoice);
+		invoice.getInvoiceLineList().add(invoiceLine2);
+		invoiceLine2.setInvoice(invoice);
+
+		userRepository.save(user1);
+		userRepository.save(user2);
 
 	}
 
