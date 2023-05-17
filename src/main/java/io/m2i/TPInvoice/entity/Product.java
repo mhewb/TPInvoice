@@ -20,6 +20,10 @@ public class Product {
     private double priceHT;
     private String description;
 
+    @ManyToOne
+    @JoinColumn(name = "user")
+    private User user;
+
     //TODO : add picture
 
 }

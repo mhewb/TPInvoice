@@ -44,14 +44,26 @@ public class WebSecurityConfig {
                 .usernameParameter("mail")
                 .passwordParameter("password");
 
+//        http.sessionManagement()
+//                .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+//                .maximumSessions(1)
+//                .maxSessionsPreventsLogin(true);
+
         http.logout()
                 .permitAll()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+//                .deleteCookies("JSESSIONID")
                 .logoutSuccessUrl("/login");
 
         return http.build();
 
     }
+
+//    @Bean
+//    public HttpSessionEventPublisher httpSessionEventPublisher() {
+//        return new HttpSessionEventPublisher();
+//    }
+//
 
 
 

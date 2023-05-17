@@ -29,6 +29,10 @@ public class Invoice {
     @JoinColumn(name = "client_id")
     private Client client;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "invoice")
     private List<InvoiceLine> invoiceLineList;
 
