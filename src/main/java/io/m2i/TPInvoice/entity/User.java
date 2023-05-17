@@ -40,4 +40,8 @@ public class User {
     @JoinColumn(name = "user_id")
     List<Product> productList = new ArrayList<>();
 
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "user_id")
+    List<Invoice> invoiceList = new ArrayList<>();
+
 }

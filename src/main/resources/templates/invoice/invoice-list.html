@@ -19,46 +19,49 @@
 
 <div class="container-fluid p-3">
 
-  <h1>Product List</h1>
+  <h1>Invoice List</h1>
 
-<a th:href="@{/products/add}">Add</a>
+<a th:href="@{/invoices/add}">Add</a>
 
   <table class="table table-striped table-hover p-3">
 
     <thead>
     <tr>
       <th>Id</th>
-      <th>Price (excl. tax)</th>
-      <th>Name</th>
-      <th>Buttons</th>
+      <th>Client</th>
+      <th>Issue Date</th>
+      <th>Due Date</th>
+      <th>Status</th>
     </tr>
     </thead>
 
     <tbody>
-    <tr th:each="product : ${productList}">
-      <td th:text="'&num;'+${product.id}"></td>
-      <td th:text="${product.getPriceExcludingTax}"></td>
-      <td th:text="${product.name}"></td>
+    <tr th:each="invoice : ${invoiceList}">
+      <td th:text="'&num;'+${invoice.id}"></td>
+      <td th:text="${invoice.client.companyName}"></td>
+      <td th:text="${invoice.issueDate}"></td>
+      <td th:text="${invoice.dueDate}"></td>
+      <td th:text="${invoice.status}"></td>
 
 
       <td>
       <td class="row-cols-1 row-cols-xs-3">
-        <a class="btn btn-outline-secondary btn-sm m-1 col-9 col-md-3 disabled"
-           th:href="@{/products/detail(id=${product.id})}"
+        <a class="btn btn-outline-secondary btn-sm m-1 col-9 col-md-3"
+           th:href="@{/invoices/detail(id=${invoice.id})}"
            role="button" >
           <i class="bi bi-card-heading"></i>
           <span class="d-none d-sm-inline-block">Details</span>
         </a>
 
         <a class="btn btn-primary btn-sm m-1 col-9 col-md-3"
-           th:href="@{/products/edit(id=${product.id})}"
+           th:href="@{/invoices/edit(id=${invoice.id})}"
            role="button">
           <i class="bi bi-pencil-square d-inline"></i>
           <span class="d-none d-sm-inline-block">Edit</span>
         </a>
 
         <a class="btn btn-danger btn-sm m-1 col-9 col-md-3"
-           th:href="@{/products/delete(id=${product.id})}"
+           th:href="@{/invoices/delete(id=${invoice.id})}"
            role="button">
           <i class="bi bi-trash3-fill"></i>
           <span class="d-none d-sm-inline-block">Delete</span>

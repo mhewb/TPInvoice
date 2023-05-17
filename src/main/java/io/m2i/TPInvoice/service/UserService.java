@@ -1,14 +1,15 @@
 package io.m2i.TPInvoice.service;
 
-import io.m2i.TPInvoice.entity.Client;
-import io.m2i.TPInvoice.entity.Product;
-import io.m2i.TPInvoice.entity.User;
+import io.m2i.TPInvoice.entity.*;
 import io.m2i.TPInvoice.repository.ClientRepository;
+import io.m2i.TPInvoice.repository.InvoiceRepository;
 import io.m2i.TPInvoice.repository.ProductRepository;
 import io.m2i.TPInvoice.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -17,6 +18,7 @@ public class UserService {
     UserRepository userRepository;
     ClientRepository clientRepository;
     ProductRepository productRepository;
+    InvoiceRepository invoiceRepository;
 
     public Client addClient(User user, Client client) {
 
@@ -38,6 +40,18 @@ public class UserService {
         userRepository.save(user);
 
         return product;
+
+    }
+
+    public Invoice addInvoice(User user, Invoice invoice) {
+
+        invoice.setUser(user);
+        user.setInvoiceList(invoiceRepository.findInvoicesByUser(user));
+        user.getInvoiceList().add(invoice);
+
+        userRepository.save(user);
+
+        return invoice;
 
     }
 

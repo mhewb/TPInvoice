@@ -23,7 +23,7 @@
 
   <div class="container-xs m-5">
 
-    <form action="#" th:action="@{/products/add}" th:object="${product}" method="post">
+    <form action="" th:action="@{/products/add}" th:object="${product}" method="post">
 
       <input id="id" type="text" th:field="*{id}"
              class="form-control" hidden="hidden"/>
@@ -33,8 +33,8 @@
         <div class="col bg-light rounded m-1 p-1">
 
           <label for="firstname"
-                 class="form-label">Price HT:</label>
-          <input id="firstname" type="text" th:field="*{priceHT}"
+                 class="form-label">Price Excl. Tax:</label>
+          <input id="firstname" type="text" th:field="*{priceExcludingTax}"
                  class="form-control" />
 
         </div>
