@@ -23,7 +23,11 @@ public class Client {
     private String companyName;
     private String phoneNumber;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Address address;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
 }

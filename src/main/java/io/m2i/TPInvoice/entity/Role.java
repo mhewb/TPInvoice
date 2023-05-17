@@ -5,25 +5,24 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.lang.NonNull;
 
 @Entity
-@Table(name = "InvoiceLine")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class InvoiceLine {
+public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private double quantity;
-    @ManyToOne
-    @JoinColumn(name = "product_id")
-    private Product product;
+    @NonNull
+    @Column(unique=true)
+    private String name;
 
-    @ManyToOne
-    @JoinColumn(name = "invoice_id")
-    private Invoice invoice;
-
+    @NonNull
+    public String getName() {
+        return name;
+    }
 }
