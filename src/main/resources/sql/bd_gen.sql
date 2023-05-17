@@ -102,9 +102,5 @@ create table if not exists TPInvoice.users_role_list
 ##### INSERTS
 
 INSERT INTO role(name) VALUES
-                                     ('USER'), ('ADMIN');
-
-
-INSERT INTO users(id, email, first_name, last_name, password) VALUES
-  (1, 'admin@my-invoice.fr', 'prénom', 'nom', 'qwerty')
+ ('USER'), ('ADMIN');
 
